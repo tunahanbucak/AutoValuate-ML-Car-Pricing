@@ -1,17 +1,35 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Car, Menu, X, ArrowRight, ArrowLeftRight } from 'lucide-react';
 
-interface NavbarProps {
-  isBackendConnected?: boolean;
-}
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
-export const Navbar: React.FC<NavbarProps> = ({ isBackendConnected = true }) => {
+export const Navbar: React.FC = () => {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isConnected, setIsConnected] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const checkHealth = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/`, { signal: AbortSignal.timeout(3000) });
+        if (res.ok) {
+          setIsConnected(true);
+        } else {
+          setIsConnected(false);
+        }
+      } catch (err) {
+        setIsConnected(false);
+      }
+    };
+
+    checkHealth();
+    const interval = setInterval(checkHealth, 15000);
+    return () => clearInterval(interval);
+  }, []);
 
   const navLinks = [
     { name: 'Ana Sayfa', href: '/' },
@@ -24,7 +42,6 @@ export const Navbar: React.FC<NavbarProps> = ({ isBackendConnected = true }) => 
   return (
     <header className="w-full bg-white/90 backdrop-blur-xl border-b border-slate-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
-        {/* Brand Logo & Status */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
           <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold shadow-md shadow-blue-500/20">
             <Car className="w-5 h-5" />
@@ -34,15 +51,26 @@ export const Navbar: React.FC<NavbarProps> = ({ isBackendConnected = true }) => 
               <span className="text-base font-black tracking-tight text-slate-900 font-mono">
                 AUTOVALUATE<span className="text-blue-600">.AI</span>
               </span>
-              <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-200 font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                FastAPI Live
-              </span>
+              {isConnected === true ? (
+                <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-200 font-mono">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  FastAPI Live
+                </span>
+              ) : isConnected === false ? (
+                <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 bg-amber-50 text-amber-700 rounded-full border border-amber-200 font-mono">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                  API Bağlanıyor...
+                </span>
+              ) : (
+                <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 bg-slate-100 text-slate-600 rounded-full border border-slate-200 font-mono">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-pulse" />
+                  Kontrol Ediliyor
+                </span>
+              )}
             </div>
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-1 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
@@ -67,7 +95,6 @@ export const Navbar: React.FC<NavbarProps> = ({ isBackendConnected = true }) => 
           })}
         </nav>
 
-        {/* Desktop CTA Button */}
         <div className="hidden lg:flex items-center gap-3 shrink-0">
           <Link
             href="/compare"
@@ -78,7 +105,6 @@ export const Navbar: React.FC<NavbarProps> = ({ isBackendConnected = true }) => 
           </Link>
         </div>
 
-        {/* Mobile Hamburger Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="lg:hidden p-2.5 rounded-xl border border-slate-200 bg-slate-100 text-slate-800 shrink-0"
@@ -88,7 +114,6 @@ export const Navbar: React.FC<NavbarProps> = ({ isBackendConnected = true }) => 
         </button>
       </div>
 
-      {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-b border-slate-200 px-4 py-5 space-y-3 shadow-xl">
           <div className="space-y-1">
