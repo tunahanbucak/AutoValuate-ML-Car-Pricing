@@ -1,12 +1,13 @@
 # 🚗 AutoValuate AI — Akıllı Araç Değerleme & Ekspertiz Yapay Zeka Portalı
 
-![AutoValuate AI Banner](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![Next.js 16](https://img.shields.io/badge/Next.js-16.3-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![Scikit--Learn](https://img.shields.io/badge/Scikit--Learn-1.9.0-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
 ![Tailwind CSS v4](https://img.shields.io/badge/Tailwind--CSS-v4.0-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 
-> **AutoValuate AI**, ikinci el araç piyasasında binlerce veri noktasından gelişmiş **Özellik Mühendisliği (Feature Engineering)** ve **Random Forest Makine Öğrenmesi Modeli** kullanarak araçların anlık piyasa değerini ($ USD / ₺ TRY), değer kaybı analizini ve ekspertiz risk skorunu anında hesaplayan uçtan uca modern bir Yapay Zeka platformudur.
+> **AutoValuate AI**, ikinci el araç piyasasında binlerce veri noktasından gelişmiş **Özellik Mühendisliği (Feature Engineering)** ve **Random Forest Makine Öğrenmesi Modeli** kullanarak araçların anlık piyasa değerini ($ USD / ₺ TRY / € EUR), 5 yıllık değer kaybı analizini, ikili araç karşılaştırma stüdyosunu ve ekspertiz risk skorunu anında hesaplayan uçtan uca modern bir Yapay Zeka platformudur.
 
 ---
 
@@ -25,19 +26,19 @@ Bu proje, veri biliminin ham veri aşamasından başlayıp **şampiyon model eğ
                                                                 ┌────────────────────────┐
                                                                 │ 4. NEXT.JS 16 FRONTEND │
                                                                 │ Visual Vehicle Render  │
-                                                                │ Vercel/Linear UX       │
+                                                                │ Royal Blue Studio UX   │
                                                                 └────────────────────────┘
 ```
 
 ---
 
-## 📊 2. Özellik Mühendisliği (Feature Engineering)
+## ⭐ 2. Platformun Öne Çıkan Özellikleri
 
-Ham verideki parametrelerin yanı sıra modelin zekasını katlayan 3 türetilmiş akıllı sütun oluşturulmuştur:
-
-1. **`vehicle_age` (Aracın Yaşı)**: `2025 - model_year`
-2. **`km_per_year` (Yıllık Ortalama Kilometre)**: `mileage_km / (vehicle_age + 1)` (Ticari taksi yıpranması vs garaj arabası farkını ayırır).
-3. **`hp_per_liter` (Motor Performans Verimliliği)**: `engine_power_hp / engine_capacity_cc` (Turbolu yeni nesil motorların prim katsayısını belirler).
+- **🤖 %94.8 Doğrulukla Random Forest Tahmini**: Araç yaşı, kilometre yıpranması, beygir gücü ve kaporta ekspertiz durumuyla anlık fiyat hesabı.
+- **⚔️ Araç Karşılaştırma Studio (`/compare`)**: İki aracı yan yana seçip canlı fiyatını, beygir gücünü ve fiyat farkını kıyaslama stüdyosu.
+- **🛠️ İnteraktif Kaporta Hasar Haritası**: Tıklanabilir 9 parça kaporta haritası ile parçaların durumuna göre otomatik ekspertiz puanlama.
+- **💵 Canlı Otomatik Döviz Kuru Servisi**: USD/TRY (48.24 ₺) ve EUR/TRY (56.20 ₺) canlı kurlarıyla otomatik para birimi dönüştürme.
+- **📈 Gauss Fiyat Dağılım Eğrisi**: 1.200 veri noktasından hesaplanan adil piyasa aralığı grafiği.
 
 ---
 
@@ -84,5 +85,5 @@ npm run dev
 ---
 
 ## 👨‍💻 Geliştirici
-**Tunahan Bucak**  
+**Tunahan Buçak**  
 - **GitHub**: [@tunahanbucak](https://github.com/tunahanbucak)
