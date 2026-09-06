@@ -1,0 +1,9 @@
+# GitHub Linguist Language Configuration
+# Notebook'ları dokümantasyon, binary ve veri dosyalarını vendored olarak işaretleyerek 
+# dil istatistiklerinin TypeScript ve Python ağırlıklı görünmesini sağlar.
+
+*.ipynb linguist-documentation=true
+*.pkl linguist-vendored=true
+*.joblib linguist-vendored=true
+*.csv linguist-vendored=true
+*.json linguist-documentation=true
